@@ -1,4 +1,5 @@
 use super::card::{Card, Color, Suite};
+use rand::prelude::*;
 
 #[derive(Debug, Clone)]
 pub struct Deck {
@@ -28,7 +29,8 @@ impl Deck {
                 15..=27 => (Suite::CLUB, Color::BLACK),
                 27..=40 => (Suite::HEART, Color::RED),
                 40..=53 => (Suite::DIAMOND, Color::RED),
-                //NOOB THING
+
+                // Error Handling? We dont care about that......
                 _ => panic!("Out of scope"),
             };
 
@@ -36,10 +38,14 @@ impl Deck {
             cards.push(new_card);
             value += 1;
         }
-        dbg!(&cards);
+        // dbg!(&cards);
         Self {
             total: 52,
             cards: cards,
         }
+    }
+    pub fn shuffle(&mut self) {
+        let mut rng = rand::rng();
+        self.cards.shuffle(&mut rng);
     }
 }
