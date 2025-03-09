@@ -1,3 +1,5 @@
+use core::fmt;
+
 #[derive(Debug, Clone)]
 pub enum Suite {
     SPADE,
@@ -39,5 +41,15 @@ impl Card {
     }
     pub fn get_color(&self) -> Color {
         self.color.clone()
+    }
+}
+impl fmt::Display for Suite {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::CLUB => write!(f, "󰣎 CLUB"),
+            Self::SPADE => write!(f, "󰣑 SPADE"),
+            Self::HEART => write!(f, " HEART"),
+            Self::DIAMOND => write!(f, " DIAMOND"),
+        }
     }
 }

@@ -1,6 +1,6 @@
 use crate::core::{card::Card, container::Pile};
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Player {
     pub name: String,
     pub id: u8,
@@ -12,15 +12,13 @@ impl Player {
         let cards = Pile::new();
         Self { name, id, cards }
     }
-    pub fn set_cards(&mut self, cards: Vec<Card>) {
-        cards
-            .iter()
-            .for_each(|card| self.cards.push(card.to_owned()));
-    }
-    pub fn show(&self) -> Option<Card> {
+    pub fn show(&mut self) -> Option<Card> {
         if self.cards.is_empty() {
             return None;
         }
-        Some(self.cards.cards[0].clone())
+
+        let card = Some(self.cards.cards[0].clone());
+        self.cards.pop();
+        card
     }
 }
